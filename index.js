@@ -98,16 +98,18 @@ for(var i=0; i<finances.length;i++){
   var month = finances[i][1];
   //Sum of the Profit/Loss
   totalProfitLoss += month;
+
+  //Calculating the total change sum
   if(i > 0){
     var prevMonth = finances[i-1][1];
     var change = month - prevMonth;
     totalChange += change;
-  //Calculating the max and min of the changes and their months
+
+  //Calculating the max and min of the changes and storing their months
     if( change < minValue){
       minValue = change;
       minMonth = finances[i][0];
     }
-
     if( change > maxValue){
       maxValue = change;
       maxMonth = finances[i][0];
