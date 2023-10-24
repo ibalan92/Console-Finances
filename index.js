@@ -87,46 +87,44 @@ var finances = [
   ['Feb-2017', 671099],
 ];
 
-console.log("Financial Analysis")
-console.log("------------------")
-// Number of elements in array equal to number of months
-console.log("Total Months: " + finances.length)
 
-//Sum of the Profit/Loss
-var sum = 0;
-
+var totalProfitLoss = 0;
+var totalChange = 0;
+var minValue = Infinity;
+var maxValue = -Infinity;
+var minMonth = "";
+var maxMonth = "";
 for(var i=0; i<finances.length;i++){
-  sum += finances[i][1];
+  var month = finances[i][1];
+  //Sum of the Profit/Loss
+  totalProfitLoss += month;
+  if(i > 0){
+    var prevMonth = finances[i-1][1];
+    var change = month - prevMonth;
+    totalChange += change;
+  //Calculating the max and min of the changes and their months
+    if( change < minValue){
+      minValue = change;
+      minMonth = finances[i][0];
+    }
 
-}
-console.log("Total: $" + sum)
-
-//Adding to an array the changes
-const changes =[];
-for(var i=1; i<finances.length; i++){
-  var difference = finances[i][1]-finances[i-1][1];
-  changes.push(difference);
+    if( change > maxValue){
+      maxValue = change;
+      maxMonth = finances[i][0];
+    }
+  }  
 }
 
 //Calculate the average change rounded to 2 decimal places
-var totalChange = 0;
-for(var i=0; i< changes.length; i++){
-  totalChange += changes[i];
-}
-var average = 0;
-average = totalChange/changes.length;
-console.log("Average change: " + average.toFixed(2))
+var average = (totalChange/(finances.length - 1)).toFixed(2);
 
-minValue = Math.min(...changes);
-maxValue = Math.max(...changes);
+console.log("Financial Analysis")
+console.log("------------------")
 
-//Calculating the max and min of the changes
-for(var i=1; i<finances.length; i++){
-  var difference = finances[i][1]-finances[i-1][1];
-  if(difference === maxValue){
-    console.log("Greatest Increase in Profits/Losses: " + finances[i][0] + " ($" + maxValue + ")"  )
-  }
-  else if(difference === minValue){
-    console.log("Greatest Decrease in Profits/Losses: " + finances[i][0] + " ($" + minValue + ")"  )
-  } ;
-}
+// Number of elements in array equal to number of months
+console.log("Total Months: " + finances.length)
+
+console.log("Total: $" + totalProfitLoss)
+console.log("Average change: " + average)
+console.log("Greatest Increase in Profits/Losses: " + maxMonth + " ($" + maxValue + ")"  )
+console.log("Greatest Decrease in Profits/Losses: " + minMonth + " ($" + minValue + ")"  )
