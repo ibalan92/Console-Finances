@@ -91,3 +91,9 @@ console.log("Financial Analysis")
 console.log("------------------")
 
 console.log("Total Months: " + finances.length)
+
+var sum = 0;
+for(var i=0; i<finances.length;i++){
+  sum += finances[i][1];
+}
+console.log("Total: $" + sum)
