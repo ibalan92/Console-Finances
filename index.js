@@ -104,7 +104,8 @@ console.log("Total: $" + sum)
 //Adding to an array the changes
 const changes =[];
 for(var i=1; i<finances.length; i++){
-  changes.push((finances[i][1]-finances[i-1][1]));
+  var difference = finances[i][1]-finances[i-1][1];
+  changes.push(difference);
 }
 
 //Calculate the average change rounded to 2 decimal places
@@ -116,4 +117,16 @@ var average = 0;
 average = totalChange/changes.length;
 console.log("Average change: " + average.toFixed(2))
 
+minValue = Math.min(...changes);
+maxValue = Math.max(...changes);
 
+//Calculating the max and min of the changes
+for(var i=1; i<finances.length; i++){
+  var difference = finances[i][1]-finances[i-1][1];
+  if(difference === maxValue){
+    console.log("Greatest Increase in Profits/Losses: " + finances[i][0] + " ($" + maxValue + ")"  )
+  }
+  else if(difference === minValue){
+    console.log("Greatest Decrease in Profits/Losses: " + finances[i][0] + " ($" + minValue + ")"  )
+  } ;
+}
