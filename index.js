@@ -89,11 +89,31 @@ var finances = [
 
 console.log("Financial Analysis")
 console.log("------------------")
-
+// Number of elements in array equal to number of months
 console.log("Total Months: " + finances.length)
 
+//Sum of the Profit/Loss
 var sum = 0;
+
 for(var i=0; i<finances.length;i++){
   sum += finances[i][1];
+
 }
 console.log("Total: $" + sum)
+
+//Adding to an array the changes
+const changes =[];
+for(var i=1; i<finances.length; i++){
+  changes.push((finances[i][1]-finances[i-1][1]));
+}
+
+//Calculate the average change rounded to 2 decimal places
+var totalChange = 0;
+for(var i=0; i< changes.length; i++){
+  totalChange += changes[i];
+}
+var average = 0;
+average = totalChange/changes.length;
+console.log("Average change: " + average.toFixed(2))
+
+
